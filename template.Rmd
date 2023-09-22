@@ -2,3 +2,32 @@
 title: "Simple document"
 output: github_document
 ---
+```{r}
+library(tidyverse)
+```
+
+Let's import the `FAS_litters.csv` csv.
+
+```{r}
+litters_df =
+  read_csv("data/FAS_litters.csv")
+
+litters_df =
+  janitor::clean_names(litters_df)
+
+litters_df
+```
+
+janitor是一个package，clean_names是其中的一个function
+
+Import the same dataset using an absolute path
+
+```{r}
+litters_df_abs =
+  read_csv("E:/DS1/DS-Lecture5/data_wrangling_i/data/FAS_litters.csv")
+
+litters_df_abs =
+  janitor::clean_names(litters_df_abs)
+
+litters_df
+```
