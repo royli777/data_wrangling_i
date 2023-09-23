@@ -61,7 +61,7 @@ Import the same dataset using an absolute path
 
 ``` r
 litters_df_abs =
-  read_csv("E:/DS1/DS-Lecture5/data_wrangling_i/data/FAS_litters.csv")
+  read_csv("E:/DS1/DS-Lecture5&6/data_wrangling_i/data/FAS_litters.csv")
 ```
 
     ## Rows: 49 Columns: 8
