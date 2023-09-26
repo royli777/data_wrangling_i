@@ -34,6 +34,8 @@ pulse_df =
   )
 ```
 
+\##Learning assessment
+
 ``` r
 litters_df = read_csv("data/FAS_litters.csv") |>
   janitor::clean_names() |>
@@ -60,3 +62,31 @@ litters_df = read_csv("data/FAS_litters.csv") |>
     ## 
     ## ℹ Use `spec()` to retrieve the full column specification for this data.
     ## ℹ Specify the column types or set `show_col_types = FALSE` to quiet this message.
+
+## bind rows
+
+Import LoTR words data
+
+``` r
+fellowship_df = 
+  readxl::read_excel("data/LotR_words.xlsx", range = "B3:D6") |>
+  mutate(movie = "fellowship")
+
+two_towers_df = 
+  readxl::read_excel("data/LotR_words.xlsx", range = "F3:H6") |>
+  mutate(movie = "two_towers")
+
+return_of_the_king_df = 
+  readxl::read_excel("data/LotR_words.xlsx", range = "J3:L6") |>
+  mutate(movie = "return_of_the_king")
+
+lotr_df =
+  bind_rows(fellowship_df, two_towers_df, return_of_the_king_df) |>
+  janitor::clean_names() |>
+  pivot_longer(
+    female:male,
+    names_to = "gender",
+    values_to = "word"
+  ) |>
+  relocate(movie)
+```
