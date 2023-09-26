@@ -2,11 +2,25 @@
 title: "tidydata"
 output: github_document
 ---
+
+pivot_longer()
+
+case_match()
+
+bind_rows(data1, data2)
+
+seperate(vector, into=c(xx,xx), 3)
+
+_seperate group "con7" to "con" and "7"_
+
+left_join(data1,data2,by = )
+
 ```{r}
 library(tidyverse) 
 ```
 
 ##Pulse data
+
 
 ```{r}
 pulse_df =
@@ -70,4 +84,30 @@ lotr_df =
     values_to = "word"
   ) |>
   relocate(movie)
+```
+
+## Revisit FAS
+
+
+```{r}
+litters_df = 
+  read_csv("data/FAS_litters.csv") |>
+  janitor::clean_names() |>
+  mutate(wt_gain = gd18_weight- gd0_weight) |>
+  select(litter_number, group, wt_gain) |>
+  separate(group, into = c("dose","day_of_tx"), 3)
+
+pups_df =
+  read_csv("data/FAS_pups.csv") |>
+  janitor::clean_names() |>
+  mutate(
+    sex = case_match(
+      sex,
+      1 ~ "male",
+      2 ~ "female"
+    )
+  )
+
+fas_df = 
+  left_join(pups_df, litters_df, by = "litter_number")
 ```
